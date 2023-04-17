@@ -10,8 +10,24 @@
 </head>
 <body>
 <main>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <div class="collapse navbar-collapse justify-content-center" id="navbar-app">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/hospitales/lista}">Hospitales</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/doctores/lista}">Doctores</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" th:href="@{/pacientes/lista}">Pacientes</a>
+        </li>
+      </ul>
+
+    </div>
+  </nav>
   <div class="container px-4 py-5">
-    <h1 class="pb-2 border-bottom">Lista Hospitales</h1>
+    <h1 class="pb-2 border-bottom">Lista Pacientes</h1>
     <table class="table table-sm">
       <tr>
         <th>#</th>
@@ -19,14 +35,16 @@
         <th>Nombre del Hospital</th>
         <th>Nombre del doctor</th>
         <th>Editar</th>
+        <th>Derivar Pacientes</th>
       </tr>
-      <tr th:each="shipper, info : ${shipperList}">
+      <tr th:each="paciente, info : ${listaPacientes}">
         <td th:text="${info.index + 1}"></td>
-        <td th:text="${shipper.companyname}"></td>
-        <td>Mostrar Pacientes</td>
-        <td>Próximas citas<</td>
-        <td><a class="btn btn-danger" th:href="@{'/shipper/delete' + '?id=' + ${shipper.shipperId}}">Editar</a>
-        <td><a class="btn btn-danger" th:href="@{'/shipper/delete' + '?id=' + ${shipper.shipperId}}">Derivar Pacientes</a>
+        <td th:text="${paciente.nombre}"></td>
+        <td th:each="hospital : ${listaHospitales}" th:if="${hospital.id}==${paciente.hospitalId}" th:text="${hospital.nombre}"></td>
+        <td th:each="doctor : ${listaDoctores}" th:if="${doctor.id}==${paciente.doctorId}" th:text="${doctor.nombre}"></td>
+        <td><a class="btn btn-primary" th:href="@{'/pacientes/editar' + '?id=' + ${paciente.id}}">Editar</a>
+        <td><a class="btn btn-secondary" th:href="@{'/pacientes/derivar' + '?id=' + ${paciente.id}}">Derivar Pacientes</a>
+
 
       </tr>
     </table>

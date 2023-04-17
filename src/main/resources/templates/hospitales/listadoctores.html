@@ -32,16 +32,10 @@
       <tr>
         <th>#</th>
         <th>Nombre de los Doctores</th>
-        <th>Nombre del hospital</th>
-        <th>Mostrar pacientes</th>
-        <th>Próximas Citas</th>
       </tr>
       <tr th:each="doctor, info : ${listaDoctores}">
         <td th:text="${info.index + 1}"></td>
         <td th:text="${doctor.nombre}"></td>
-        <td th:each="hospital : ${listaHospitales}" th:if="${hospital.id}==${doctor.hospitalId}" th:text="${hospital.nombre}"></td>
-        <td><a class="btn btn-primary" th:href="@{'/doctores/listapacientes' + '?id=' + ${doctor.id}}">Mostrar Pacientes</a>
-        <td><a class="btn btn-danger" th:href="@{'/doctores/listaproximascitas' + '?id=' + ${doctor.id}}">Próximas Citas</a></td>
       </tr>
     </table>
   </div>

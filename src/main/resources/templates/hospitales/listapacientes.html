@@ -27,21 +27,15 @@
     </div>
   </nav>
   <div class="container px-4 py-5">
-    <h1 class="pb-2 border-bottom">Lista Doctores</h1>
+    <h1 class="pb-2 border-bottom">Lista Pacientes</h1>
     <table class="table table-sm">
       <tr>
         <th>#</th>
-        <th>Nombre de los Doctores</th>
-        <th>Nombre del hospital</th>
-        <th>Mostrar pacientes</th>
-        <th>Próximas Citas</th>
+        <th>Nombre de los Pacientes</th>
       </tr>
-      <tr th:each="doctor, info : ${listaDoctores}">
+      <tr th:each="paciente, info : ${listaPacientes}">
         <td th:text="${info.index + 1}"></td>
-        <td th:text="${doctor.nombre}"></td>
-        <td th:each="hospital : ${listaHospitales}" th:if="${hospital.id}==${doctor.hospitalId}" th:text="${hospital.nombre}"></td>
-        <td><a class="btn btn-primary" th:href="@{'/doctores/listapacientes' + '?id=' + ${doctor.id}}">Mostrar Pacientes</a>
-        <td><a class="btn btn-danger" th:href="@{'/doctores/listaproximascitas' + '?id=' + ${doctor.id}}">Próximas Citas</a></td>
+        <td th:text="${paciente.nombre}"></td>
       </tr>
     </table>
   </div>
