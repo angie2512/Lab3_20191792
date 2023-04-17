@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label form="nombre">Derivar del Doctor:</label>
                     </div>
-                    <select id="doctores">
+                    <select id="doctores" th:name="doctorid1">
                         <option th:each="doctor: ${listaDoctores}"
                                 th:value="${doctor.id}"
                                 th:text="${doctor.nombre}"></option>
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label form="edad">Al doctor:</label>
                     </div>
-                    <select id="doctor">
+                    <select id="doctor" th:name="doctorid2">
                         <option th:each="doctor : ${listaDoctores}"
                                 th:value="${doctor.id}"
                                 th:text="${doctor.nombre}"></option>

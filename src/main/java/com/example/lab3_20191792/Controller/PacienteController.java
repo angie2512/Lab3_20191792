@@ -63,7 +63,7 @@ public class PacienteController {
 
     }
 
-    @GetMapping("pacientes/derivar")
+    @GetMapping("/pacientes/derivar")
     public String listaDoctores(Model model) {
         List<Doctor> listaDoctores = doctorRepository.findAll(); //listatodo
         model.addAttribute("listaDoctores", listaDoctores);
@@ -72,7 +72,7 @@ public class PacienteController {
 
     @PostMapping("pacientes/guardarDeriv")
     public String guardarDeriv(Model model, @RequestParam("doctorid1") int id1, @RequestParam("doctorid2") int id2 ) {
-        pacienteRepository.actualizarDoctor(id1,id2);
+        pacienteRepository.actualizarDoctor(id2,id1);
         return "redirect:/pacientes/lista";
     }
 
