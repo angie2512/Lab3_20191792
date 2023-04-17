@@ -35,7 +35,6 @@
         <th>Nombre del Hospital</th>
         <th>Nombre del doctor</th>
         <th>Editar</th>
-        <th>Derivar Pacientes</th>
       </tr>
       <tr th:each="paciente, info : ${listaPacientes}">
         <td th:text="${info.index + 1}"></td>
@@ -43,11 +42,12 @@
         <td th:each="hospital : ${listaHospitales}" th:if="${hospital.id}==${paciente.hospitalId}" th:text="${hospital.nombre}"></td>
         <td th:each="doctor : ${listaDoctores}" th:if="${doctor.id}==${paciente.doctorId}" th:text="${doctor.nombre}"></td>
         <td><a class="btn btn-primary" th:href="@{'/pacientes/editar' + '?id=' + ${paciente.id}}">Editar</a>
-        <td><a class="btn btn-secondary" th:href="@{'/pacientes/derivar' + '?id=' + ${paciente.id}}">Derivar Pacientes</a>
-
-
       </tr>
     </table>
+    <div>
+      <a class="btn btn-secondary" th:href="@{/pacientes/derivar}">Derivar Paciente</a>
+    </div>
+
   </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

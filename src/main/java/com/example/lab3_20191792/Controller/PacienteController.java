@@ -38,24 +38,42 @@ public class PacienteController {
         return "pacientes/lista";
     }
 
-    @PostMapping("pacientes/guardar")
-    public String guardarPaciente(Paciente paciente) {
-        pacienteRepository.actualizarHabitacionById(paciente.getNumeroHabitacion(), paciente.getId());
-        return "redirect:/pacientes/lista";
-    }
-
     @GetMapping("pacientes/editar")
-    public String editarPacientes(Model model, @RequestParam("id") int id) {
-
+    public String editarVista(Model model, @RequestParam("id") int id) {
         Optional<Paciente> optPaciente = pacienteRepository.findById(id);
         if (optPaciente.isPresent()) {
-            Paciente paciente = optPaciente.get();
-            model.addAttribute("paciente", paciente);
-            return "pacientes/editar";
+            model.addAttribute("paciente", optPaciente.get());
+            return "/pacientes/editar";
+        } else {
+            return "redirect:/pacientes/lista";
+        }
+    }
+
+
+    @PostMapping("/pacientes/guardar")
+    public String editarPacientes(Model model, Paciente paciente) {
+
+        Optional<Paciente> optPaciente = pacienteRepository.findById(paciente.getId());
+        if (optPaciente.isPresent()) {
+            pacienteRepository.actualizarHabitacionById(paciente.getNumeroHabitacion(), paciente.getId());
+            return "redirect:/pacientes/lista";
         } else {
             return "redirect:/pacientes/lista";
         }
 
+    }
+
+    @GetMapping("pacientes/derivar")
+    public String listaDoctores(Model model) {
+        List<Doctor> listaDoctores = doctorRepository.findAll(); //listatodo
+        model.addAttribute("listaDoctores", listaDoctores);
+        return "pacientes/derivar";
+    }
+
+    @PostMapping("pacientes/guardarDeriv")
+    public String guardarDeriv(Model model, @RequestParam("doctorid1") int id1, @RequestParam("doctorid2") int id2 ) {
+        pacienteRepository.actualizarDoctor(id1,id2);
+        return "redirect:/pacientes/lista";
     }
 
 
